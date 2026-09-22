@@ -2,11 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Ninjas Are Butterflies — Randomizer</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Ninjas Are Butterflies — Random Episode</title>
 
   <style>
+
     * {
       box-sizing: border-box;
     }
@@ -14,129 +19,272 @@
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: Arial, Helvetica, sans-serif;
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
       color: white;
 
       background:
-        radial-gradient(circle at 20% 20%, #5d28d9 0%, transparent 30%),
-        radial-gradient(circle at 80% 20%, #be185d 0%, transparent 28%),
-        linear-gradient(135deg, #090914, #151126);
+        radial-gradient(
+          circle at 15% 15%,
+          rgba(124, 58, 237, .45),
+          transparent 30%
+        ),
+
+        radial-gradient(
+          circle at 85% 15%,
+          rgba(219, 39, 119, .35),
+          transparent 30%
+        ),
+
+        radial-gradient(
+          circle at 50% 100%,
+          rgba(37, 99, 235, .25),
+          transparent 35%
+        ),
+
+        #080810;
 
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
 
       padding: 25px;
+
+      overflow-x: hidden;
     }
+
+
+    /* Floating decorations */
+
+    .butterfly {
+      position: fixed;
+
+      font-size: 55px;
+
+      opacity: .12;
+
+      pointer-events: none;
+
+      animation:
+        float 7s ease-in-out infinite;
+    }
+
+    .b1 {
+      top: 8%;
+      left: 7%;
+    }
+
+    .b2 {
+      bottom: 10%;
+      right: 8%;
+
+      animation-delay: 2s;
+    }
+
+    .b3 {
+      top: 55%;
+      left: 4%;
+
+      animation-delay: 4s;
+    }
+
+
+    @keyframes float {
+
+      0%, 100% {
+        transform:
+          translateY(0)
+          rotate(-5deg);
+      }
+
+      50% {
+        transform:
+          translateY(-25px)
+          rotate(5deg);
+      }
+    }
+
 
     .container {
       width: 100%;
       max-width: 850px;
+
       text-align: center;
+
+      position: relative;
+      z-index: 2;
     }
+
 
     .logo {
       font-size: 70px;
+
       margin-bottom: 5px;
     }
 
+
     h1 {
+
       margin: 0;
 
-      font-size: clamp(2.4rem, 7vw, 5rem);
-      font-weight: 900;
-      letter-spacing: -3px;
+      font-size:
+        clamp(2.5rem, 8vw, 5rem);
 
-      background: linear-gradient(
-        90deg,
-        #ffffff,
-        #c4b5fd,
-        #f9a8d4
-      );
+      line-height: .95;
+
+      font-weight: 900;
+
+      letter-spacing: -4px;
+
+      background:
+        linear-gradient(
+          90deg,
+          #ffffff,
+          #c4b5fd,
+          #f9a8d4
+        );
 
       -webkit-background-clip: text;
       background-clip: text;
+
       color: transparent;
     }
 
+
     .subtitle {
-      color: #b7b4c9;
+
+      margin:
+        18px auto
+        35px;
+
+      color: #aaa8bc;
+
       font-size: 1.1rem;
-      margin: 15px 0 35px;
+
+      line-height: 1.5;
     }
 
-    .card {
-      background: rgba(20, 18, 35, .85);
 
-      border: 1px solid rgba(255,255,255,.12);
+    .card {
+
+      background:
+        rgba(18, 17, 31, .88);
+
+      border:
+        1px solid
+        rgba(255,255,255,.12);
 
       border-radius: 28px;
 
-      padding: 25px;
+      padding: 28px;
 
       box-shadow:
-        0 25px 80px rgba(0,0,0,.45),
-        inset 0 1px rgba(255,255,255,.05);
+        0 30px 90px
+        rgba(0,0,0,.5),
+
+        inset 0 1px
+        rgba(255,255,255,.05);
 
       backdrop-filter: blur(20px);
     }
 
-    .thumbnail {
-      width: 100%;
-      aspect-ratio: 16 / 9;
 
-      object-fit: cover;
+    #player {
+
+      width: 100%;
+
+      aspect-ratio: 16 / 9;
 
       border-radius: 18px;
 
-      margin-bottom: 25px;
+      overflow: hidden;
 
-      background: #08080f;
+      background: #000;
+
+      margin-bottom: 25px;
     }
 
+
+    #player iframe {
+
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+
     .episode-label {
+
       display: inline-block;
 
-      padding: 7px 13px;
+      padding:
+        7px 14px;
 
       border-radius: 999px;
 
-      background: linear-gradient(
-        135deg,
-        #7c3aed,
-        #db2777
-      );
+      background:
+        linear-gradient(
+          135deg,
+          #7c3aed,
+          #db2777
+        );
 
       font-size: .8rem;
-      font-weight: bold;
 
-      margin-bottom: 15px;
+      font-weight: 800;
+
+      margin-bottom: 14px;
     }
 
-    h2 {
-      font-size: clamp(1.5rem, 4vw, 2.4rem);
+
+    #episodeTitle {
+
+      margin: 0;
+
+      font-size:
+        clamp(1.5rem, 5vw, 2.5rem);
 
       line-height: 1.15;
 
-      margin: 0 0 25px;
+      font-weight: 850;
     }
 
+
+    #status {
+
+      color: #77748a;
+
+      margin:
+        15px 0
+        25px;
+
+      min-height: 20px;
+    }
+
+
     .buttons {
+
       display: flex;
-      gap: 12px;
 
       justify-content: center;
+
+      gap: 12px;
 
       flex-wrap: wrap;
     }
 
-    button,
-    .watch {
+
+    button {
+
       border: none;
 
       border-radius: 14px;
 
-      padding: 16px 25px;
+      padding:
+        16px 25px;
 
       font-size: 1rem;
 
@@ -144,52 +292,132 @@
 
       cursor: pointer;
 
-      text-decoration: none;
-
-      transition: .2s;
-    }
-
-    button:hover,
-    .watch:hover {
-      transform: translateY(-3px);
-    }
-
-    .random {
       color: white;
 
-      background: linear-gradient(
-        135deg,
-        #7c3aed,
-        #db2777
-      );
+      transition:
+        transform .15s ease,
+        box-shadow .15s ease,
+        opacity .15s ease;
+    }
+
+
+    button:hover {
+
+      transform:
+        translateY(-3px);
+    }
+
+
+    button:active {
+
+      transform:
+        translateY(0);
+    }
+
+
+    #randomButton {
+
+      background:
+        linear-gradient(
+          135deg,
+          #7c3aed,
+          #db2777
+        );
 
       box-shadow:
-        0 10px 30px rgba(124,58,237,.35);
+        0 10px 35px
+        rgba(124,58,237,.35);
+
+      min-width: 220px;
     }
 
-    .watch {
+
+    #watchButton {
+
+      background:
+        rgba(255,255,255,.09);
+
+      border:
+        1px solid
+        rgba(255,255,255,.12);
+
+      text-decoration: none;
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
       color: white;
 
-      background: rgba(255,255,255,.1);
+      border-radius: 14px;
 
-      border: 1px solid rgba(255,255,255,.15);
+      padding:
+        16px 25px;
+
+      font-weight: 800;
     }
 
-    .hint {
-      color: #77748a;
 
-      font-size: .8rem;
+    #watchButton:hover {
 
-      margin-top: 25px;
+      transform:
+        translateY(-3px);
+
+      background:
+        rgba(255,255,255,.14);
     }
+
 
     footer {
-      color: #656174;
-
-      font-size: .8rem;
 
       margin-top: 25px;
+
+      color: #656274;
+
+      font-size: .8rem;
     }
+
+
+    .loading {
+
+      padding: 20px;
+
+      color: #aaa8bc;
+    }
+
+
+    .spinner {
+
+      width: 35px;
+      height: 35px;
+
+      border:
+        4px solid
+        rgba(255,255,255,.1);
+
+      border-top-color:
+        #a855f7;
+
+      border-radius: 50%;
+
+      animation:
+        spin .8s linear infinite;
+
+      margin:
+        0 auto
+        15px;
+    }
+
+
+    @keyframes spin {
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
 
     @media (max-width: 600px) {
 
@@ -205,11 +433,36 @@
       .logo {
         font-size: 50px;
       }
+
+      h1 {
+        letter-spacing: -2px;
+      }
+
+      #randomButton,
+      #watchButton {
+        width: 100%;
+      }
     }
+
   </style>
+
 </head>
 
+
 <body>
+
+  <div class="butterfly b1">
+    🦋
+  </div>
+
+  <div class="butterfly b2">
+    🥷
+  </div>
+
+  <div class="butterfly b3">
+    🦋
+  </div>
+
 
   <main class="container">
 
@@ -217,44 +470,64 @@
       🥷🦋
     </div>
 
+
     <h1>
       Ninjas Are Butterflies
     </h1>
 
+
     <p class="subtitle">
-      Let the ninja choose your next episode.
+      Don't know what episode to listen to?
+      <br>
+      Let the ninja choose.
     </p>
 
-    <div class="card">
 
-      <img
-        id="thumbnail"
-        class="thumbnail"
-        src="https://i.ytimg.com/vi/2DcYAtOEB_E/maxresdefault.jpg"
-        alt="Ninjas Are Butterflies episode"
-      >
+    <section class="card">
+
+
+      <div id="player">
+
+        <div class="loading">
+
+          <div class="spinner"></div>
+
+          Loading the ninja archives...
+
+        </div>
+
+      </div>
+
 
       <div class="episode-label">
         RANDOM EPISODE
       </div>
 
-      <h2 id="title">
-        Ready to roll the dice?
+
+      <h2 id="episodeTitle">
+        Getting the episodes...
       </h2>
+
+
+      <div id="status">
+        Connecting to YouTube...
+      </div>
+
 
       <div class="buttons">
 
         <button
-          class="random"
+          id="randomButton"
           onclick="randomEpisode()"
+          disabled
         >
           🎲 Random Episode
         </button>
 
+
         <a
-          id="watch"
-          class="watch"
-          href="https://www.youtube.com/watch?v=2DcYAtOEB_E"
+          id="watchButton"
+          href="#"
           target="_blank"
           rel="noopener"
         >
@@ -263,142 +536,340 @@
 
       </div>
 
-      <div class="hint">
-        Every click picks another episode from the playlist.
-      </div>
+    </section>
 
-    </div>
 
     <footer>
-      Fan-made Ninjas Are Butterflies episode randomizer
+
+      Fan-made episode randomizer
+
     </footer>
 
   </main>
+
+
+  <!--
+    ==========================================================
+    YOUTUBE PLAYER API
+    ==========================================================
+  -->
+
+  <script
+    src="https://www.youtube.com/iframe_api">
+  </script>
 
 
   <script>
 
     /*
       ==========================================================
-      NINJAS ARE BUTTERFLIES YOUTUBE PLAYLIST
+      YOUR PLAYLIST
       ==========================================================
-
-      Playlist:
-      PLnrQGD2lbP5nrWwhSi9SjNTTstqHIaMPR
-
-      Add YouTube video IDs below.
-
-      A YouTube video ID is the part after:
-      youtube.com/watch?v=
-
-      Example:
-
-      https://www.youtube.com/watch?v=2DcYAtOEB_E
-
-      Video ID:
-      2DcYAtOEB_E
     */
 
+    const PLAYLIST_ID =
+      "PLnrQGD2lbP5nrWwhSi9SjNTTstqHIaMPR";
 
-    const episodes = [
 
-      {
-        id: "2DcYAtOEB_E",
-        title: "Ninjas Are Butterflies"
-      },
+    let player;
+
+    let videos = [];
+
+    let currentVideo = null;
+
+
+    /*
+      ==========================================================
+      YOUTUBE CREATES THE PLAYER HERE
+      ==========================================================
+    */
+
+    function onYouTubeIframeAPIReady() {
+
+      player =
+        new YT.Player(
+          "player",
+          {
+
+            width: "100%",
+
+            height: "100%",
+
+            playerVars: {
+
+              /*
+                Load YOUR playlist.
+              */
+
+              listType: "playlist",
+
+              list:
+                PLAYLIST_ID,
+
+              /*
+                Don't automatically start
+                playing when the page loads.
+              */
+
+              autoplay: 0,
+
+              /*
+                YouTube branding.
+              */
+
+              modestbranding: 1,
+
+              /*
+                Keep controls visible.
+              */
+
+              controls: 1
+
+            },
+
+
+            events: {
+
+              onReady:
+                playerReady,
+
+              onError:
+                playerError
+
+            }
+
+          }
+        );
+
+    }
+
+
+    /*
+      ==========================================================
+      PLAYER READY
+      ==========================================================
+    */
+
+    function playerReady() {
 
       /*
-        ADD MORE VIDEOS HERE.
-
-        Example:
-
-        {
-          id: "ABC123XYZ",
-          title: "Episode Title"
-        },
-
-        {
-          id: "DEF456XYZ",
-          title: "Another Episode"
-        }
+        Give YouTube a moment to finish loading
+        the playlist.
       */
 
-    ];
+      setTimeout(
+        getPlaylist,
+        1500
+      );
+
+    }
 
 
-    let currentEpisode = null;
+    /*
+      ==========================================================
+      GET VIDEOS FROM THE PLAYLIST
+      ==========================================================
+    */
 
+    function getPlaylist() {
 
-    function randomEpisode() {
-
-      if (episodes.length === 0) {
-
-        alert(
-          "You need to add the YouTube videos to the episode list."
-        );
+      if (!player) {
 
         return;
       }
 
 
-      /*
-        Pick a random episode.
-      */
+      const playlist =
+        player.getPlaylist();
 
-      let randomIndex =
-        Math.floor(
-          Math.random() * episodes.length
-        );
-
-
-      /*
-        Don't immediately pick the same episode
-        twice in a row if there is more than one.
-      */
 
       if (
-        episodes.length > 1 &&
-        episodes[randomIndex] === currentEpisode
+        playlist &&
+        playlist.length > 0
       ) {
 
-        randomIndex =
-          (randomIndex + 1) %
-          episodes.length;
+        videos = playlist;
+
+
+        document.getElementById(
+          "randomButton"
+        ).disabled = false;
+
+
+        document.getElementById(
+          "status"
+        ).textContent =
+          videos.length +
+          " episodes loaded from YouTube.";
+
+
+        /*
+          Pick the first random episode.
+        */
+
+        randomEpisode();
+
       }
 
+      else {
 
-      currentEpisode =
-        episodes[randomIndex];
+        /*
+          Sometimes YouTube takes longer
+          to populate the playlist.
+        */
 
+        setTimeout(
+          getPlaylist,
+          1500
+        );
 
-      /*
-        Update title.
-      */
-
-      document.getElementById("title").textContent =
-        currentEpisode.title;
-
-
-      /*
-        Update YouTube thumbnail.
-      */
-
-      document.getElementById("thumbnail").src =
-        "https://i.ytimg.com/vi/" +
-        currentEpisode.id +
-        "/maxresdefault.jpg";
-
-
-      /*
-        Update Watch button.
-      */
-
-      document.getElementById("watch").href =
-        "https://www.youtube.com/watch?v=" +
-        currentEpisode.id;
+      }
 
     }
 
+
+    /*
+      ==========================================================
+      RANDOM EPISODE
+      ==========================================================
+    */
+
+    function randomEpisode() {
+
+      if (
+        !videos ||
+        videos.length === 0
+      ) {
+
+        return;
+      }
+
+
+      let randomIndex;
+
+
+      /*
+        Make sure we don't pick the
+        exact same episode twice in
+        a row when possible.
+      */
+
+      do {
+
+        randomIndex =
+          Math.floor(
+            Math.random() *
+            videos.length
+          );
+
+      }
+
+      while (
+        videos.length > 1 &&
+        videos[randomIndex] === currentVideo
+      );
+
+
+      currentVideo =
+        videos[randomIndex];
+
+
+      /*
+        Tell YouTube to load the
+        randomly selected video.
+      */
+
+      player.cueVideoById(
+        currentVideo
+      );
+
+
+      /*
+        Get the video's title.
+      */
+
+      setTimeout(
+        updateEpisodeInfo,
+        300
+      );
+
+    }
+
+
+    /*
+      ==========================================================
+      UPDATE TITLE / WATCH LINK
+      ==========================================================
+    */
+
+    function updateEpisodeInfo() {
+
+      if (!player) {
+        return;
+      }
+
+
+      const data =
+        player.getVideoData();
+
+
+      if (
+        data &&
+        data.video_id
+      ) {
+
+        const videoID =
+          data.video_id;
+
+
+        const title =
+          data.title ||
+          "Ninjas Are Butterflies";
+
+
+        document.getElementById(
+          "episodeTitle"
+        ).textContent =
+          title;
+
+
+        document.getElementById(
+          "status"
+        ).textContent =
+          "The ninja has chosen.";
+
+
+        document.getElementById(
+          "watchButton"
+        ).href =
+          "https://www.youtube.com/watch?v=" +
+          videoID;
+
+      }
+
+    }
+
+
+    /*
+      ==========================================================
+      YOUTUBE ERROR
+      ==========================================================
+    */
+
+    function playerError(error) {
+
+      console.log(
+        "YouTube error:",
+        error
+      );
+
+
+      document.getElementById(
+        "status"
+      ).textContent =
+        "YouTube couldn't load the playlist. Try refreshing the page.";
+
+    }
 
   </script>
 
